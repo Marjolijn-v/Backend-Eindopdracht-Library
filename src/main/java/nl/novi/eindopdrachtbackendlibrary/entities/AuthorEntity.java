@@ -1,5 +1,6 @@
 package nl.novi.eindopdrachtbackendlibrary.entities;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
@@ -11,8 +12,12 @@ import java.util.Set;
 @Table(name = "authors")
 public class AuthorEntity extends BaseEntity {
 
+    @Column(nullable = false)
     private String firstName;
+
+    @Column(nullable = false)
     private String lastName;
+
     @ManyToMany(mappedBy = "authors")
     private Set<BookEntity> books = new HashSet<>();
 

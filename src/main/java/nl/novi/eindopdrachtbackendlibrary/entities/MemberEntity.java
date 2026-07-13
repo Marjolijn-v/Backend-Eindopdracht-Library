@@ -1,5 +1,6 @@
 package nl.novi.eindopdrachtbackendlibrary.entities;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
 
@@ -10,11 +11,20 @@ import java.util.List;
 @Entity
 @Table(name = "members")
 public class MemberEntity extends BaseEntity{
+    @Column(nullable = false)
     private String firstName;
+
+    @Column(nullable = false)
     private String lastName;
+
+    @Column(unique = true, nullable = false)
     private String email;
+
     private String phoneNumber;
+
+    @Column(name = "date_of_birth")
     private LocalDateTime dob;
+
     private List<LoanActivityEntity> loans = new ArrayList<>();
 
     public String getFirstName() {
