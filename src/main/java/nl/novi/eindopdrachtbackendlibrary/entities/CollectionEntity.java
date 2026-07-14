@@ -2,21 +2,23 @@ package nl.novi.eindopdrachtbackendlibrary.entities;
 
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
+import java.util.List;
 
 
 @Entity
 @Table(name = "collections")
 public class CollectionEntity extends BaseEntity{
 
-    @OneToMany(fetch = FetchType.LAZY)
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "book_id")
-    private BookEntity book;
+    private List<BookEntity> books = new ArrayList<>();
 
-    public BookEntity getBook() {
-        return book;
+    public List<BookEntity> getBooks() {
+        return books;
     }
 
-    public void setBook(BookEntity book) {
-        this.book = book;
+    public void setBooks(List<BookEntity> books) {
+        this.books = books;
     }
 }

@@ -29,8 +29,7 @@ public class BookEntity extends BaseEntity{
     @JoinColumn(name = "genre_id")
     private GenreEntity genre;
 
-    @OneToMany(mappedBy = "book")
-    private List<CollectionEntity> numberOfCopies = new ArrayList<>();
+    private int numberOfCopies;
 
 
 
@@ -77,11 +76,12 @@ public class BookEntity extends BaseEntity{
         this.genre = genre;
     }
 
-    public List<CollectionEntity> getNumberOfCopies() {
+    public int getNumberOfCopies() {
         return numberOfCopies;
     }
 
-    public void setNumberOfCopies(List<CollectionEntity> numberOfCopies) {
+    public void setNumberOfCopies(int numberOfCopies) {
         this.numberOfCopies = numberOfCopies;
     }
 }
+

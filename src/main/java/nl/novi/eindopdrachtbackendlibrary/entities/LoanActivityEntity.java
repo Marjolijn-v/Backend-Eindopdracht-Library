@@ -1,9 +1,6 @@
 package nl.novi.eindopdrachtbackendlibrary.entities;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
 
@@ -15,12 +12,12 @@ public class LoanActivityEntity extends BaseEntity {
     @JoinColumn(name = "book_id")
     private BookEntity book;
 
-    @OneToMany
+    @ManyToOne
     @JoinColumn(name = "user_id")
     private UserEntity user;
 
     private LocalDateTime loanDate;
-    // Helper maken voor returnDate
+    private LocalDateTime returnDate;
 
 
     public BookEntity getBook() {
@@ -45,5 +42,13 @@ public class LoanActivityEntity extends BaseEntity {
 
     public void setLoanDate(LocalDateTime loanDate) {
         this.loanDate = loanDate;
+    }
+
+    public LocalDateTime getReturnDate() {
+        return returnDate;
+    }
+
+    public void setReturnDate(LocalDateTime returnDate) {
+        this.returnDate = returnDate;
     }
 }
