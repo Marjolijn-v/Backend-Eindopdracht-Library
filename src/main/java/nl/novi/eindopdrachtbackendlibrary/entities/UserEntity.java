@@ -1,20 +1,24 @@
 package nl.novi.eindopdrachtbackendlibrary.entities;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
 
 @Entity
 @Table(name = "users")
 public class UserEntity {
+    @Column(nullable = false)
     private String name;
+
+    @Column(nullable = false)
     private String email;
+
     private String phoneNumber;
     private LocalDateTime dob;
-    private List<LoanActivityEntity> loanActivities = new ArrayList<>();
+
+    @ManyToOne
+    @JoinColumn(name = "collection_id")
+    private CollectionEntity collection;
 
     public String getName() {
         return name;
@@ -48,11 +52,11 @@ public class UserEntity {
         this.dob = dob;
     }
 
-    public List<LoanActivityEntity> getLoanActivities() {
-        return loanActivities;
+    public CollectionEntity getCollection() {
+        return collection;
     }
 
-    public void setLoanActivities(List<LoanActivityEntity> loanActivities) {
-        this.loanActivities = loanActivities;
+    public void setCollection(CollectionEntity collection) {
+        this.collection = collection;
     }
 }
