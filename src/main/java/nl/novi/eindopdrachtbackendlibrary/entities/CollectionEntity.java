@@ -1,18 +1,14 @@
 package nl.novi.eindopdrachtbackendlibrary.entities;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
-import java.util.ArrayList;
-import java.util.List;
+
 
 @Entity
 @Table(name = "collections")
 public class CollectionEntity extends BaseEntity{
 
-    @OneToMany
+    @OneToMany(fetch = FetchType.LAZY)
     @JoinColumn(name = "book_id")
     private BookEntity book;
 
