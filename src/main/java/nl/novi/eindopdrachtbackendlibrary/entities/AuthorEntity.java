@@ -13,28 +13,27 @@ import java.util.Set;
 public class AuthorEntity extends BaseEntity {
 
     @Column(nullable = false)
-    private String firstName;
+    private String name;
 
-    @Column(nullable = false)
-    private String lastName;
+    private String biography;
 
     @ManyToMany(mappedBy = "authors")
     private Set<BookEntity> books = new HashSet<>();
 
-    public String getFirstName() {
-        return firstName;
+    public String getName() {
+        return name;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getLastName() {
-        return lastName;
+    public String getBiography() {
+        return biography;
     }
 
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
+    public void setBiography(String biography) {
+        this.biography = biography;
     }
 
     public Set<BookEntity> getBooks() {
