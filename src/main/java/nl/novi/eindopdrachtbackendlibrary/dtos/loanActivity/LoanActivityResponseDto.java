@@ -1,13 +1,14 @@
 package nl.novi.eindopdrachtbackendlibrary.dtos.loanActivity;
 
 import nl.novi.eindopdrachtbackendlibrary.dtos.book.BookResponseDto;
+import nl.novi.eindopdrachtbackendlibrary.dtos.book.BookSummaryDto;
 import nl.novi.eindopdrachtbackendlibrary.dtos.user.UserResponseDto;
 
 import java.time.LocalDateTime;
 
 public class LoanActivityResponseDto {
     private Long id;
-    private BookResponseDto book;
+    private BookSummaryDto book;
     private UserResponseDto user;
     private LocalDateTime loanDate;
     private LocalDateTime returnDate;
@@ -20,11 +21,11 @@ public class LoanActivityResponseDto {
         this.id = id;
     }
 
-    public BookResponseDto getBook() {
+    public BookSummaryDto getBook() {
         return book;
     }
 
-    public void setBook(BookResponseDto book) {
+    public void setBook(BookSummaryDto book) {
         this.book = book;
     }
 

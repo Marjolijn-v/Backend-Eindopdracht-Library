@@ -3,8 +3,6 @@ package nl.novi.eindopdrachtbackendlibrary.dtos.book;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
-import nl.novi.eindopdrachtbackendlibrary.dtos.author.AuthorResponseDto;
-import nl.novi.eindopdrachtbackendlibrary.dtos.genre.GenreResponseDto;
 
 import java.util.Set;
 
@@ -38,7 +36,7 @@ public class BookRequestDto {
         this.releaseYear = releaseYear;
     }
 
-    public Set<Long> getAuthorIds() {
+    public Long getAuthorIds() {
         return authorIds;
     }
 
