@@ -8,12 +8,12 @@ import java.time.LocalDateTime;
 @Table(name = "loan_activities")
 public class LoanActivityEntity extends BaseEntity {
 
-    @OneToMany
-    @JoinColumn(name = "book_id")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "book_id", nullable = false)
     private BookEntity book;
 
-    @ManyToOne
-    @JoinColumn(name = "user_id")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id", nullable = false)
     private UserEntity user;
 
     private LocalDateTime loanDate;

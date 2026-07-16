@@ -10,8 +10,7 @@ import java.util.List;
 @Table(name = "collections")
 public class CollectionEntity extends BaseEntity{
 
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinColumn(name = "book_id")
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "collection")
     private List<BookEntity> books = new ArrayList<>();
 
     public List<BookEntity> getBooks() {

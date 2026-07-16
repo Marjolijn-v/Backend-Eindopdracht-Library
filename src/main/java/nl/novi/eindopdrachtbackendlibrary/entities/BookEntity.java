@@ -31,9 +31,13 @@ public class BookEntity extends BaseEntity{
 
     private int numberOfCopies;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "collection_id")
+    private CollectionEntity collection;
 
 
-    //    picture en numberOfCopies toevoegen.
+
+    //    picture toevoegen.
 
 
     public String getTitle() {
@@ -82,6 +86,14 @@ public class BookEntity extends BaseEntity{
 
     public void setNumberOfCopies(int numberOfCopies) {
         this.numberOfCopies = numberOfCopies;
+    }
+
+    public CollectionEntity getCollection() {
+        return collection;
+    }
+
+    public void setCollection(CollectionEntity collection) {
+        this.collection = collection;
     }
 }
 
