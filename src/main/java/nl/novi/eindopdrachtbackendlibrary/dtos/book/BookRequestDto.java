@@ -10,13 +10,14 @@ import java.util.Set;
 
 public class BookRequestDto {
     @NotBlank(message = "Titel mag niet leeg zijn")
-    @Size()
+    @Size(min = 3, max = 200, message = "Titel bevat min 2 en max 3 karakters.")
     private String title;
 
     private int releaseYear;
 
     @NotNull
     private Set<Long> authorIds;
+    @Size(max = 600, message = "Beschrijving mag maximaal 600 karakters bevatten.")
     private String description;
     private Long genreId;
     private int numberOfCopies;
