@@ -1,5 +1,6 @@
 package nl.novi.eindopdrachtbackendlibrary.controllers;
 
+import jakarta.validation.Valid;
 import nl.novi.eindopdrachtbackendlibrary.dtos.genre.GenreRequestDto;
 import nl.novi.eindopdrachtbackendlibrary.dtos.genre.GenreResponseDto;
 import nl.novi.eindopdrachtbackendlibrary.services.GenreService;
@@ -35,7 +36,7 @@ public class GenreController {
     @PostMapping
     public ResponseEntity<GenreResponseDto> createGenre(@RequestBody @Valid GenreRequestDto genreRequestDto) {
         GenreResponseDto newGenre = genreService.createGenre(genreRequestDto);
-        return ResponseEntity.created(newGenre, HttpStatus.OK);
+        return ResponseEntity.created();
     }
     @PutMapping("/{id}")
     public ResponseEntity<GenreResponseDto> updateGenre(@PathVariable Long id, @RequestBody @Valid GenreRequestDto genreRequestDto) {

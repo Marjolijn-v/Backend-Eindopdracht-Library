@@ -1,4 +1,4 @@
 package nl.novi.eindopdrachtbackendlibrary.controllers;
 
-public class MemberController {
+public class CollectionController {
 }
