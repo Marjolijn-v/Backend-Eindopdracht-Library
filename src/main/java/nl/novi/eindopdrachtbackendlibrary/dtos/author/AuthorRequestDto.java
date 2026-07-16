@@ -1,11 +1,10 @@
 package nl.novi.eindopdrachtbackendlibrary.dtos.author;
 
-import org.antlr.v4.runtime.misc.NotNull;
+import jakarta.validation.constraints.NotBlank;
 
-import java.lang.annotation.Native;
 
 public class AuthorRequestDto {
-    @NotNull
+    @NotBlank(message = "Naam mag niet leeg zijn")
     private String name;
 
     private String biography;
