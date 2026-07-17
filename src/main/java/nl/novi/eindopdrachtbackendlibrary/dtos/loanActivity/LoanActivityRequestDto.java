@@ -28,7 +28,7 @@ public class LoanActivityRequestDto {
         this.userId = userId;
     }
 
-    public LocalDateTime getLoanDate() {
+    public static LocalDateTime getLoanDate() {
         return loanDate;
     }
 
