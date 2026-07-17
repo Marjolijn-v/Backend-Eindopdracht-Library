@@ -61,7 +61,7 @@ public class AuthorService {
         authorRepository.deleteById(id);
     }
 
-    public List<AuthorResponseDto> getArtistsForAlbum(Long albumId) {
+    public List<AuthorResponseDto> getAuthorForBook(Long albumId) {
         return authorDtoMapper.mapToDto(authorRepository.findAuthorsByBooksId(albumId));
     }
 
