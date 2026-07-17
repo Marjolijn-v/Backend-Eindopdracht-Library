@@ -38,7 +38,7 @@ public class AuthorService {
     }
 
     @Transactional
-    public AuthorResponseDto createAuthor(Long id, AuthorRequestDto authorModel) {
+    public AuthorResponseDto createAuthor(AuthorRequestDto authorModel) {
         AuthorEntity authorEntity = authorDtoMapper.mapToEntity(authorModel);
         authorEntity = authorRepository.save(authorEntity);
         return authorDtoMapper.mapToDto(authorEntity);
