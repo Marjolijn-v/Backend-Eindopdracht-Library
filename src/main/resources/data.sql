@@ -1,3 +1,10 @@
+ALTER SEQUENCE authors_id_seq RESTART WITH 6;
+ALTER SEQUENCE genres_id_seq RESTART WITH 6;
+ALTER SEQUENCE books_id_seq RESTART WITH 6;
+ALTER SEQUENCE collections_id_seq RESTART WITH 6;
+ALTER SEQUENCE users_id_seq RESTART WITH 6;
+ALTER SEQUENCE loan_activities_id_seq RESTART WITH 6;
+
 INSERT INTO genres (id, name, description, created_date, edited_date) VALUES
                                                                           (1, 'Roman', 'Nederlandse romans en verhalen', NOW(), NOW()),
                                                                           (2, 'Thriller', 'Spannende thrillers', NOW(), NOW()),
