@@ -1,12 +1,15 @@
 package nl.novi.eindopdrachtbackendlibrary.controllers;
 
+import jakarta.validation.Valid;
 import nl.novi.eindopdrachtbackendlibrary.dtos.genre.GenreRequestDto;
 import nl.novi.eindopdrachtbackendlibrary.dtos.genre.GenreResponseDto;
+import nl.novi.eindopdrachtbackendlibrary.helpers.UrlHelper;
 import nl.novi.eindopdrachtbackendlibrary.services.GenreService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.net.URI;
 import java.util.List;
 
 @RestController
@@ -14,10 +17,12 @@ import java.util.List;
 public class GenreController {
 
     private final GenreService genreService;
+    private final UrlHelper urlHelper;
 
 
-    public GenreController(GenreService genreService) {
+    public GenreController(GenreService genreService, UrlHelper urlHelper) {
         this.genreService = genreService;
+        this.urlHelper = urlHelper;
     }
 
     @GetMapping
@@ -35,7 +40,7 @@ public class GenreController {
     @PostMapping
     public ResponseEntity<GenreResponseDto> createGenre(@RequestBody @Valid GenreRequestDto genreRequestDto) {
         GenreResponseDto newGenre = genreService.createGenre(genreRequestDto);
-        return ResponseEntity.created(newGenre, HttpStatus.OK);
+        return ResponseEntity.created(urlHelper.getCurrentUrlWithId(newGenre.getId())).body(newGenre);
     }
     @PutMapping("/{id}")
     public ResponseEntity<GenreResponseDto> updateGenre(@PathVariable Long id, @RequestBody @Valid GenreRequestDto genreRequestDto) {

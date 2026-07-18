@@ -1,4 +1,17 @@
 package nl.novi.eindopdrachtbackendlibrary.repositories;
 
-public class BookRepository {
+import nl.novi.eindopdrachtbackendlibrary.entities.AuthorEntity;
+import nl.novi.eindopdrachtbackendlibrary.entities.BookEntity;
+import nl.novi.eindopdrachtbackendlibrary.entities.GenreEntity;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import java.util.List;
+
+public interface BookRepository extends JpaRepository<BookEntity, Long> {
+
+    List<BookEntity> findByCollectionNotEmpty();
+    List<BookEntity> findByCollectionEmpty();
+    List<AuthorEntity> findByGenre_Id(Long genreId);
+
+    List<BookEntity> findByGenre(GenreEntity genre);
 }
