@@ -14,7 +14,10 @@ import nl.novi.eindopdrachtbackendlibrary.repositories.GenreRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 @Service
 public class BookService {
@@ -56,6 +59,10 @@ public class BookService {
             bookEntity.setGenre(new GenreEntity());
         }
 
+        if (bookModel.getAuthorIds() != null && !bookModel.getAuthorIds().isEmpty()) {
+            Set<AuthorEntity> authors = bookModel.getAuthorIds().stream().map(this::getAuthorEntity).collect(Collectors.toSet());
+        }
+
         bookEntity = bookRepository.save(bookEntity);
         return bookDtoMapper.mapToDto(bookEntity);
 
@@ -67,10 +74,23 @@ public class BookService {
 
         existingBookEntity.setTitle(bookModel.getTitle());
         existingBookEntity.setReleaseYear(bookModel.getReleaseYear());
-        existingBookEntity.setAuthors(Collections.singleton(getAuthorEntity(bookModel.getAuthorIds())));
         existingBookEntity.setDescription(bookModel.getDescription());
-        existingBookEntity.setGenre(getGenreEntity(bookModel.getGenreId()));
         existingBookEntity.setNumberOfCopies(bookModel.getNumberOfCopies());
+
+        if(bookModel.getAuthorIds() != null && !bookModel.getAuthorIds().isEmpty()) {
+            Set<AuthorEntity> authors = bookModel.getAuthorIds().stream().map(this::getAuthorEntity).collect(Collectors.toSet());
+            existingBookEntity.setAuthors(authors);
+        } else {
+            existingBookEntity.setAuthors(new HashSet<>());
+        }
+
+        if(bookModel.getGenreId() != null) {
+            existingBookEntity.setGenre(getGenreEntity(bookModel.getGenreId()));
+        } else {
+            existingBookEntity.setGenre(null);
+        }
+
+        existingBookEntity = bookRepository.save(existingBookEntity);
         return bookDtoMapper.mapToDto(existingBookEntity);
 
     }
@@ -122,9 +142,9 @@ public class BookService {
     @Transactional
     public List<BookResponseDto> getAvailableBooks(Boolean collection) {
         if(collection) {
-            return bookDtoMapper.mapToDto(bookRepository.findByCollectionItemNotEmpty());
+            return bookDtoMapper.mapToDto(bookRepository.findByCollectionNotEmpty());
         } else {
-            return bookDtoMapper.mapToDto(bookRepository.findByCollectionItemEmpty());
+            return bookDtoMapper.mapToDto(bookRepository.findByCollectionEmpty());
         }
     }
 

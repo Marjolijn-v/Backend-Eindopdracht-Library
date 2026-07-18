@@ -6,11 +6,13 @@ import nl.novi.eindopdrachtbackendlibrary.dtos.collection.CollectionResponseDto;
 import nl.novi.eindopdrachtbackendlibrary.entities.BookEntity;
 import nl.novi.eindopdrachtbackendlibrary.entities.CollectionEntity;
 import nl.novi.eindopdrachtbackendlibrary.repositories.BookRepository;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Component
 public class CollectionDtoMapper implements DtoMapper<CollectionResponseDto, CollectionRequestDto, CollectionEntity>{
 
     private final BookDtoMapper bookDtoMapper;

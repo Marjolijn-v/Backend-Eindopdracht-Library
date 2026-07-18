@@ -10,9 +10,16 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Component
-public class BookDtoMapper implements DtoMapper<BookResponseDto, BookRequestDto, BookEntity>
+public class BookDtoMapper implements DtoMapper<BookResponseDto, BookRequestDto, BookEntity> {
 
-{
+    private final AuthorDtoMapper authorDtoMapper;
+    private final GenreDtoMapper genreDtoMapper;
+
+    public BookDtoMapper(AuthorDtoMapper authorDtoMapper, GenreDtoMapper genreDtoMapper) {
+        this.authorDtoMapper = authorDtoMapper;
+        this.genreDtoMapper = genreDtoMapper;
+    }
+
     @Override
     public BookResponseDto mapToDto(BookEntity model) {
         var result = new BookResponseDto();
@@ -20,7 +27,14 @@ public class BookDtoMapper implements DtoMapper<BookResponseDto, BookRequestDto,
         result.setTitle(model.getTitle());
         result.setDescription(model.getDescription());
         result.setReleaseYear(model.getReleaseYear());
+        result.setGenre(genreDtoMapper.mapToDto(model.getGenre()));
         result.setNumberOfCopies(model.getNumberOfCopies());
+
+
+        if (model.getAuthors() != null && !model.getAuthors().isEmpty()) {
+            result.setAuthors(model.getAuthors().stream().map(authorDtoMapper::mapToDto).collect(Collectors.toSet()));
+        }
+
         return result;
     }
 

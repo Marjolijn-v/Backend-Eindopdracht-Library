@@ -36,7 +36,7 @@ public class BookRequestDto {
         this.releaseYear = releaseYear;
     }
 
-    public Long getAuthorIds() {
+    public Set<Long> getAuthorIds() {
         return authorIds;
     }
 

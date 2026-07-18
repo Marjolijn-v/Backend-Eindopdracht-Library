@@ -9,8 +9,8 @@ import java.util.List;
 
 public interface BookRepository extends JpaRepository<BookEntity, Long> {
 
-    List<BookEntity> findByCollectionItemNotEmpty();
-    List<BookEntity> findByCollectionItemEmpty();
+    List<BookEntity> findByCollectionNotEmpty();
+    List<BookEntity> findByCollectionEmpty();
     List<AuthorEntity> findByGenre_Id(Long genreId);
 
     List<BookEntity> findByGenre(GenreEntity genre);
