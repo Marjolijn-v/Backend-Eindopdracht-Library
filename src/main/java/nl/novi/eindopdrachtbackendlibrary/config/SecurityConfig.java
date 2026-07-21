@@ -45,16 +45,46 @@ public class SecurityConfig {
                                 .decoder(jwtDecoder())
                         ))
                 .authorizeHttpRequests(authorize -> authorize
-                        .requestMatchers("/users").authenticated()
-                        .requestMatchers("/authors").hasAnyRole("ADMIN", "EMPLOYEE")
-                        .requestMatchers("/collection").hasAnyRole("ADMIN", "EMPLOYEE")
-                        .requestMatchers(HttpMethod.GET, "/loan-activities/user/*").hasAnyRole("MEMBER", "EMPLOYEE", "ADMIN")
-                        .requestMatchers("/loan-activities/**").hasAnyRole("EMPLOYEE", "ADMIN")
+                        .requestMatchers(
+                                "/swagger-ui/**",
+                                "/v3/api-docs/**",
+                                "/swagger-ui.html"
+                        ).permitAll()
+
                         .requestMatchers(HttpMethod.GET, "/books", "/books/**").permitAll()
-                        .requestMatchers(HttpMethod.POST).hasAnyRole("ADMIN", "EMPLOYEE")
-                        .requestMatchers(HttpMethod.PUT).hasAnyRole("ADMIN", "EMPLOYEE")
-                        .requestMatchers(HttpMethod.DELETE).hasRole("ADMIN")
-                        .requestMatchers(HttpMethod.GET).authenticated()
+                        .requestMatchers(HttpMethod.GET, "/authors", "/authors/**").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/genres", "/genres/**").permitAll()
+
+                        .requestMatchers(HttpMethod.GET, "/users").hasAnyRole("EMPLOYEE", "ADMIN")
+                        .requestMatchers(HttpMethod.POST, "/users").hasAnyRole("EMPLOYEE", "ADMIN")
+                        .requestMatchers(HttpMethod.DELETE, "/users/**").hasRole("ADMIN")
+                        .requestMatchers("/users/**").authenticated()
+
+                        .requestMatchers(HttpMethod.GET, "/collections", "/collections/**").hasAnyRole("MEMBER", "EMPLOYEE", "ADMIN")
+                        .requestMatchers(HttpMethod.POST, "/collections", "/collections/*/books").hasAnyRole("EMPLOYEE", "ADMIN")
+                        .requestMatchers(HttpMethod.PUT, "/collections/**").hasAnyRole("EMPLOYEE", "ADMIN")
+                        .requestMatchers(HttpMethod.DELETE, "/collections/*/books").hasAnyRole("EMPLOYEE", "ADMIN")
+                        .requestMatchers(HttpMethod.DELETE, "/collections/**").hasRole("ADMIN")
+
+                        .requestMatchers(HttpMethod.POST, "/authors").hasAnyRole("EMPLOYEE", "ADMIN")
+                        .requestMatchers(HttpMethod.PUT, "/authors/**").hasAnyRole("EMPLOYEE", "ADMIN")
+                        .requestMatchers(HttpMethod.DELETE, "/authors/**").hasRole("ADMIN")
+
+                        .requestMatchers(HttpMethod.POST, "/genres").hasAnyRole("EMPLOYEE", "ADMIN")
+                        .requestMatchers(HttpMethod.PUT, "/genres/**").hasAnyRole("EMPLOYEE", "ADMIN")
+                        .requestMatchers(HttpMethod.DELETE, "/genres/**").hasRole("ADMIN")
+
+                        .requestMatchers(HttpMethod.POST, "/books").hasAnyRole("EMPLOYEE", "ADMIN")
+                        .requestMatchers(HttpMethod.PUT, "/books/**").hasAnyRole("EMPLOYEE", "ADMIN")
+                        .requestMatchers(HttpMethod.POST, "/books/*/authors/*").hasAnyRole("EMPLOYEE", "ADMIN")
+                        .requestMatchers(HttpMethod.DELETE, "/books/*/authors/*").hasAnyRole("EMPLOYEE", "ADMIN")
+                        .requestMatchers(HttpMethod.DELETE, "/books/**").hasRole("ADMIN")
+
+                        .requestMatchers(HttpMethod.GET, "/loan-activities/user/*").hasAnyRole("MEMBER", "EMPLOYEE", "ADMIN")
+                        .requestMatchers(HttpMethod.POST, "/loan-activities").hasAnyRole("MEMBER", "EMPLOYEE", "ADMIN")
+                        .requestMatchers(HttpMethod.POST, "/loan-activities/*/return").hasAnyRole("MEMBER", "EMPLOYEE", "ADMIN")
+                        .requestMatchers("/loan-activities/**").hasAnyRole("EMPLOYEE", "ADMIN")
+
                         .anyRequest().denyAll()
                 )
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))

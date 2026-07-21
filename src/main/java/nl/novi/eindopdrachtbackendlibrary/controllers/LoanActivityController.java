@@ -7,6 +7,7 @@ import nl.novi.eindopdrachtbackendlibrary.helpers.UrlHelper;
 import nl.novi.eindopdrachtbackendlibrary.services.LoanActivityService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -36,7 +37,6 @@ public class LoanActivityController {
     }
 
     @GetMapping("/user/{userId}")
-    @PreAuthorize("hasAnyRole('EMPLOYEE','ADMIN') or (hasRole('MEMBER') and #userId == principal.id)")
     public ResponseEntity<List<LoanActivityResponseDto>> getLoanActivitiesByUser(@PathVariable Long userId) {
         List<LoanActivityResponseDto> loanActivities = loanActivityService.findLoanActivitiesByUser(userId);
         return new ResponseEntity<>(loanActivities, HttpStatus.OK);

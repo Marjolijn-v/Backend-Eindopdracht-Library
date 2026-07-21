@@ -9,6 +9,7 @@ import nl.novi.eindopdrachtbackendlibrary.helpers.UrlHelper;
 import nl.novi.eindopdrachtbackendlibrary.services.UserService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -32,6 +33,7 @@ public class UserController {
     }
 
     @GetMapping("/{id}")
+    @PreAuthorize("hasRole('ADMIN') or hasRole('EMPLOYEE') or @userSecurity.isSelf(#id, authentication)")
     public ResponseEntity<UserResponseDto> getUserById(@PathVariable Long id) {
         UserResponseDto user = userService.findUserById(id);
         return new ResponseEntity<>(user, HttpStatus.OK);
