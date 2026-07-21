@@ -36,6 +36,7 @@ public class LoanActivityController {
     }
 
     @GetMapping("/user/{userId}")
+    @PreAuthorize("hasAnyRole('EMPLOYEE','ADMIN') or (hasRole('MEMBER') and #userId == principal.id)")
     public ResponseEntity<List<LoanActivityResponseDto>> getLoanActivitiesByUser(@PathVariable Long userId) {
         List<LoanActivityResponseDto> loanActivities = loanActivityService.findLoanActivitiesByUser(userId);
         return new ResponseEntity<>(loanActivities, HttpStatus.OK);

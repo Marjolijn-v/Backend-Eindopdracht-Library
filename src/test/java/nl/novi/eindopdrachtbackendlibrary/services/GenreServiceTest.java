@@ -191,7 +191,8 @@ class GenreServiceTest {
         genreService.deleteGenre(id);
 
         verify(genreRepository, times(1)).deleteById(id);
-        verify(bookRepository, times(1)).findByGenre_Id(id);
+        verify(bookRepository, times(1)).findByGenre(genreEntity);
+        verify(bookRepository, times(1)).saveAll(anyList());
     }
 
     @Test
@@ -215,6 +216,6 @@ class GenreServiceTest {
         genreService.deleteGenre(id);
 
         verify(genreRepository, times(1)).deleteById(id);
-        verify(bookRepository, times(3)).save(any());
+        verify(bookRepository, times(1)).saveAll(books);
     }
 }
