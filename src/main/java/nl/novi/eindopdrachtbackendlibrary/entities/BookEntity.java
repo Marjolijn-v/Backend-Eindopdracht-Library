@@ -25,7 +25,7 @@ public class BookEntity extends BaseEntity{
 
     private String description;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "genre_id")
     private GenreEntity genre;
 
