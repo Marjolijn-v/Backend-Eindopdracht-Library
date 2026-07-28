@@ -54,13 +54,13 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.GET, "/books", "/books/**").permitAll()
                         .requestMatchers(HttpMethod.GET, "/authors", "/authors/**").permitAll()
                         .requestMatchers(HttpMethod.GET, "/genres", "/genres/**").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/collections", "/collections?**").permitAll()
 
                         .requestMatchers(HttpMethod.GET, "/users").hasAnyRole("EMPLOYEE", "ADMIN")
                         .requestMatchers(HttpMethod.POST, "/users").hasAnyRole("EMPLOYEE", "ADMIN")
                         .requestMatchers(HttpMethod.DELETE, "/users/**").hasRole("ADMIN")
                         .requestMatchers("/users/**").authenticated()
 
-                        .requestMatchers(HttpMethod.GET, "/collections", "/collections/**").hasAnyRole("MEMBER", "EMPLOYEE", "ADMIN")
                         .requestMatchers(HttpMethod.POST, "/collections", "/collections/*/books").hasAnyRole("EMPLOYEE", "ADMIN")
                         .requestMatchers(HttpMethod.PUT, "/collections/**").hasAnyRole("EMPLOYEE", "ADMIN")
                         .requestMatchers(HttpMethod.DELETE, "/collections/*/books").hasAnyRole("EMPLOYEE", "ADMIN")
