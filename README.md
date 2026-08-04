@@ -9,9 +9,10 @@
 6. [Project lokaal opzetten en draaien](#project-lokaal-opzetten-en-draaien)
 7. [Configuratie](#configuratie)
 8. [Database en seeddata](#database-en-seeddata)
-9. [Tests uitvoeren](#tests-uitvoeren)
-10. [Handige Maven-commando’s](#handige-maven-commandos)
-11. [Troubleshooting](#troubleshooting)
+9. [Applicatie starten in IntelliJ](#applicatie-starten-in-intellij)
+10. [Tests uitvoeren](#tests-uitvoeren-in-intellij)
+11. [Authenticatie en autorisatie met Keycloak](#authenticatie-en-autorisatie-met-keycloak)
+
 
 ---
 
@@ -224,7 +225,7 @@ Je kunt Keycloak lokaal draaien (bijv. via PowerShell of Docker) en daarna inlog
 - - Voor Mac/Linux: `bin/kc.sh start-dev --http-port 9090`
 - - Voor Windows: `bin\kc.bat start-dev --http-port 9090`
 
-Nu kan je navigeren naar `localhost:9090` en maak je een admin account aan, waar je op een later moment weer maa kan inloggen.
+Nu kan je navigeren naar `localhost:9090` en maak je een admin account aan, waar je op een later moment weer mee kan inloggen.
 
 
 
@@ -282,5 +283,5 @@ Houd gebruikersgegevens (wachtwoorden/secrets) buiten de repository en documente
 ---
 
 ## Auteur
-Marjolijn  
+Marjolijn Verspiek  
 Repository: https://github.com/Marjolijn-v/Backend-Eindopdracht-Library
