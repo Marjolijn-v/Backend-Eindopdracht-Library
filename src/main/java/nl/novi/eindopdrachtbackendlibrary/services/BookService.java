@@ -61,6 +61,8 @@ public class BookService {
 
         if (bookModel.getAuthorIds() != null && !bookModel.getAuthorIds().isEmpty()) {
             Set<AuthorEntity> authors = bookModel.getAuthorIds().stream().map(this::getAuthorEntity).collect(Collectors.toSet());
+            bookEntity.setAuthors(authors);
+
         }
 
         bookEntity = bookRepository.save(bookEntity);

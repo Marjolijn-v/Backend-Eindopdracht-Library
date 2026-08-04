@@ -1,8 +1,12 @@
 package nl.novi.eindopdrachtbackendlibrary.mappers;
 
+import nl.novi.eindopdrachtbackendlibrary.dtos.author.AuthorSummaryDto;
 import nl.novi.eindopdrachtbackendlibrary.dtos.book.BookRequestDto;
 import nl.novi.eindopdrachtbackendlibrary.dtos.book.BookResponseDto;
+import nl.novi.eindopdrachtbackendlibrary.dtos.genre.GenreSummaryDto;
+import nl.novi.eindopdrachtbackendlibrary.entities.AuthorEntity;
 import nl.novi.eindopdrachtbackendlibrary.entities.BookEntity;
+import nl.novi.eindopdrachtbackendlibrary.entities.GenreEntity;
 import org.springframework.stereotype.Component;
 
 
@@ -12,14 +16,6 @@ import java.util.stream.Collectors;
 @Component
 public class BookDtoMapper implements DtoMapper<BookResponseDto, BookRequestDto, BookEntity> {
 
-    private final AuthorDtoMapper authorDtoMapper;
-    private final GenreDtoMapper genreDtoMapper;
-
-    public BookDtoMapper(AuthorDtoMapper authorDtoMapper, GenreDtoMapper genreDtoMapper) {
-        this.authorDtoMapper = authorDtoMapper;
-        this.genreDtoMapper = genreDtoMapper;
-    }
-
     @Override
     public BookResponseDto mapToDto(BookEntity model) {
         var result = new BookResponseDto();
@@ -27,12 +23,12 @@ public class BookDtoMapper implements DtoMapper<BookResponseDto, BookRequestDto,
         result.setTitle(model.getTitle());
         result.setDescription(model.getDescription());
         result.setReleaseYear(model.getReleaseYear());
-        result.setGenre(genreDtoMapper.mapToDto(model.getGenre()));
+        result.setGenre(mapGenreToSummary(model.getGenre()));
         result.setNumberOfCopies(model.getNumberOfCopies());
 
 
         if (model.getAuthors() != null && !model.getAuthors().isEmpty()) {
-            result.setAuthors(model.getAuthors().stream().map(authorDtoMapper::mapToDto).collect(Collectors.toSet()));
+            result.setAuthors(model.getAuthors().stream().map(this::mapAuthorToSummary).collect(Collectors.toSet()));
         }
 
         return result;
@@ -52,4 +48,19 @@ public class BookDtoMapper implements DtoMapper<BookResponseDto, BookRequestDto,
         result.setNumberOfCopies(bookModel.getNumberOfCopies());
         return result;
     }
+
+    private AuthorSummaryDto mapAuthorToSummary(AuthorEntity author) {
+        var dto = new AuthorSummaryDto();
+        dto.setId(author.getId());
+        dto.setName(author.getName());
+        return dto;
+    }
+
+    private GenreSummaryDto mapGenreToSummary(GenreEntity genre) {
+        var dto = new GenreSummaryDto();
+        dto.setId(genre.getId());
+        dto.setName(genre.getName());
+        return dto;
+    }
+
 }

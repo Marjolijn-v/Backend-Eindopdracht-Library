@@ -1,7 +1,9 @@
 package nl.novi.eindopdrachtbackendlibrary.dtos.book;
 
 import nl.novi.eindopdrachtbackendlibrary.dtos.author.AuthorResponseDto;
+import nl.novi.eindopdrachtbackendlibrary.dtos.author.AuthorSummaryDto;
 import nl.novi.eindopdrachtbackendlibrary.dtos.genre.GenreResponseDto;
+import nl.novi.eindopdrachtbackendlibrary.dtos.genre.GenreSummaryDto;
 
 import java.util.Set;
 
@@ -9,9 +11,9 @@ public class BookResponseDto {
     private Long id;
     private String title;
     private int releaseYear;
-    private Set<AuthorResponseDto> authors;
+    private Set<AuthorSummaryDto> authors;
     private String description;
-    private GenreResponseDto genre;
+    private GenreSummaryDto genre;
     private int numberOfCopies;
 
     public Long getId() {
@@ -38,11 +40,11 @@ public class BookResponseDto {
         this.releaseYear = releaseYear;
     }
 
-    public Set<AuthorResponseDto> getAuthors() {
+    public Set<AuthorSummaryDto> getAuthors() {
         return authors;
     }
 
-    public void setAuthors(Set<AuthorResponseDto> authors) {
+    public void setAuthors(Set<AuthorSummaryDto> authors) {
         this.authors = authors;
     }
 
@@ -54,11 +56,11 @@ public class BookResponseDto {
         this.description = description;
     }
 
-    public GenreResponseDto getGenre() {
+    public GenreSummaryDto getGenre() {
         return genre;
     }
 
-    public void setGenre(GenreResponseDto genre) {
+    public void setGenre(GenreSummaryDto genre) {
         this.genre = genre;
     }
 
