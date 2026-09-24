@@ -35,9 +35,12 @@ public class BookEntity extends BaseEntity{
     @JoinColumn(name = "collection_id")
     private CollectionEntity collection;
 
-
-
-    //    picture toevoegen.
+    @OneToMany(
+            mappedBy = "book",
+            cascade = CascadeType.ALL,
+            orphanRemoval = true
+    )
+    private List<BookImageEntity> bookImages = new ArrayList<>();
 
 
     public String getTitle() {
@@ -94,6 +97,14 @@ public class BookEntity extends BaseEntity{
 
     public void setCollection(CollectionEntity collection) {
         this.collection = collection;
+    }
+
+    public List<BookImageEntity> getBookImages() {
+        return bookImages;
+    }
+
+    public void setBookImages(List<BookImageEntity> bookImages) {
+        this.bookImages = bookImages;
     }
 }
 

@@ -15,13 +15,6 @@ public class BookImageEntity {
     @JoinColumn(name = "book_id", nullable = false)
     private BookEntity book;
 
-    public BookImageEntity(String fileName, String url, String contentType, byte[] contents, BookEntity book) {
-        this.fileName = fileName;
-        this.url = url;
-        this.contentType = contentType;
-        this.contents = contents;
-        this.book = book;
-    }
 
     public String getFileName() {
         return fileName;
