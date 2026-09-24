@@ -23,7 +23,7 @@ public class BookImageService {
     }
 
     @Transactional
-    public BookImageEntity uploadImage(Long bookId, MultipartFile file) throws IOException {
+    public BookImageEntity uploadImage(Long bookId, MultipartFile file, String imageType) throws IOException {
         if (file.isEmpty()) {
             throw new IllegalArgumentException("Er is geen afbeelding gevonden");
         }
@@ -39,6 +39,7 @@ public class BookImageService {
         image.setFileName(file.getOriginalFilename());
         image.setContents(file.getBytes());
         image.setContentType(file.getContentType());
+        image.setImageType(imageType);
         image.setBook(book);
 
         return bookImageRepository.save(image);
@@ -60,6 +61,7 @@ public class BookImageService {
         return bookImageRepository.findByBookId(bookId);
     }
 
+    @Transactional
     public void deleteImage(Long bookId, Long bookImageId) {
         BookImageEntity image = getImage(bookId, bookImageId);
         bookImageRepository.delete(image);

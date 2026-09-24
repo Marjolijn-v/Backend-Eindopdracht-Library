@@ -3,18 +3,24 @@ package nl.novi.eindopdrachtbackendlibrary.entities;
 import jakarta.persistence.*;
 
 @Entity
-public class BookImageEntity {
+@Table(name = "book_images")
+public class BookImageEntity extends BaseEntity {
+    @Column(nullable = false)
     private String fileName;
-    private String url;
+
+    @Column(nullable = false)
     private String contentType;
 
+    @Column(nullable = false)
+    private String imageType;
+
     @Lob
+    @Column(nullable = false)
     private byte[] contents;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "book_id", nullable = false)
     private BookEntity book;
-
 
     public String getFileName() {
         return fileName;
@@ -24,20 +30,20 @@ public class BookImageEntity {
         this.fileName = fileName;
     }
 
-    public String getUrl() {
-        return url;
-    }
-
-    public void setUrl(String url) {
-        this.url = url;
-    }
-
     public String getContentType() {
         return contentType;
     }
 
     public void setContentType(String contentType) {
         this.contentType = contentType;
+    }
+
+    public String getImageType() {
+        return imageType;
+    }
+
+    public void setImageType(String imageType) {
+        this.imageType = imageType;
     }
 
     public byte[] getContents() {

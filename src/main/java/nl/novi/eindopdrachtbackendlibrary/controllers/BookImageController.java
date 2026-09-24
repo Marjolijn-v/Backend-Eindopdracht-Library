@@ -2,6 +2,7 @@ package nl.novi.eindopdrachtbackendlibrary.controllers;
 
 import nl.novi.eindopdrachtbackendlibrary.entities.BookImageEntity;
 import nl.novi.eindopdrachtbackendlibrary.services.BookImageService;
+import nl.novi.eindopdrachtbackendlibrary.dtos.bookImage.BookImageResponseDto;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.InvalidMediaTypeException;
 import org.springframework.http.MediaType;
@@ -25,22 +26,31 @@ public class BookImageController {
     }
 
     @PostMapping
-    public ResponseEntity<Long> uploadImage(
+    public ResponseEntity<BookImageResponseDto> uploadImage(
             @PathVariable Long bookId,
-            @RequestParam("file")MultipartFile file
+            @RequestParam("file")MultipartFile file,
+            @RequestParam(value = "imageType", required = false, defaultValue = "COVER") String imageType
             ) throws IOException {
 
-        BookImageEntity image = bookImageService.uploadImage(bookId, file);
+        BookImageEntity image = bookImageService.uploadImage(bookId, file, imageType);
 
         String imageUrl = ServletUriComponentsBuilder
                 .fromCurrentRequest()
                 .path("/{bookImageId}")
-                .buildAndExpand(image.getBook().getId())
+                .buildAndExpand(image.getId())
                 .toUriString();
+
+        BookImageResponseDto response = new BookImageResponseDto();
+        response.setId(image.getId());
+        response.setFileName(image.getFileName());
+        response.setContentType(image.getContentType());
+        response.setImageType(image.getImageType());
+        response.setBookId(bookId);
+        response.setDownloadUrl(imageUrl);
 
         return ResponseEntity
                 .created(URI.create(imageUrl))
-                .body(image.getBook().getId());
+                .body(response);
 
     }
 
