@@ -54,7 +54,7 @@ public class BookImageService {
 
     @Transactional
     public List<BookImageEntity> getImagesForBook(Long bookId) {
-        if(!bookImageRepository.existsById(bookId)) {
+        if(!bookRepository.existsById(bookId)) {
             throw new RecordNotFoundException("Boek " + bookId + " niet gevonden");
         }
 

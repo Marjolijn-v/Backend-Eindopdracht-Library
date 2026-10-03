@@ -55,10 +55,28 @@ public class BookImageController {
     }
 
     @GetMapping
-    public ResponseEntity<List<BookImageEntity>> getImages(@PathVariable Long bookId) {
-        return ResponseEntity.ok(
-                bookImageService.getImagesForBook(bookId)
-        );
+    public ResponseEntity<List<BookImageResponseDto>> getImages(@PathVariable Long bookId) {
+        List<BookImageResponseDto> images = bookImageService.getImagesForBook(bookId)
+                .stream()
+                .map(image -> {
+                    String downloadUrl = ServletUriComponentsBuilder
+                            .fromCurrentRequest()
+                            .path("/{bookImageId}")
+                            .buildAndExpand(image.getId())
+                            .toUriString();
+
+                    BookImageResponseDto dto = new BookImageResponseDto();
+                    dto.setId(image.getId());
+                    dto.setFileName(image.getFileName());
+                    dto.setContentType(image.getContentType());
+                    dto.setImageType(image.getImageType());
+                    dto.setBookId(bookId);
+                    dto.setDownloadUrl(downloadUrl);
+                    return dto;
+                })
+                .toList();
+
+        return ResponseEntity.ok(images);
     }
 
     @GetMapping("/{bookImageId}")

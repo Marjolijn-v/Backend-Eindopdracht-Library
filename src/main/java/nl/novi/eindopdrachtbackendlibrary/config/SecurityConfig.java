@@ -78,6 +78,8 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.PUT, "/books/**").hasAnyRole("EMPLOYEE", "ADMIN")
                         .requestMatchers(HttpMethod.POST, "/books/*/authors/*").hasAnyRole("EMPLOYEE", "ADMIN")
                         .requestMatchers(HttpMethod.DELETE, "/books/*/authors/*").hasAnyRole("EMPLOYEE", "ADMIN")
+                        .requestMatchers(HttpMethod.POST, "/books/*/images").permitAll()
+                        .requestMatchers(HttpMethod.DELETE, "/books/*/images/*").hasAnyRole("EMPLOYEE", "ADMIN")
                         .requestMatchers(HttpMethod.DELETE, "/books/**").hasRole("ADMIN")
 
                         .requestMatchers(HttpMethod.GET, "/loan-activities/user/*").hasAnyRole("MEMBER", "EMPLOYEE", "ADMIN")
