@@ -1,6 +1,6 @@
 package nl.novi.eindopdrachtbackendlibrary.dtos.collection;
 
-import nl.novi.eindopdrachtbackendlibrary.dtos.book.BookResponseDto;
+
 import nl.novi.eindopdrachtbackendlibrary.dtos.book.BookSummaryDto;
 
 import java.util.List;

@@ -9,7 +9,7 @@ public class LoanActivityRequestDto {
     private Long bookId;
     @NotNull
     private Long userId;
-    private static LocalDateTime loanDate;
+    private LocalDateTime loanDate;
     private LocalDateTime returnDate;
 
     public Long getBookId() {
@@ -28,7 +28,7 @@ public class LoanActivityRequestDto {
         this.userId = userId;
     }
 
-    public static LocalDateTime getLoanDate() {
+    public LocalDateTime getLoanDate() {
         return loanDate;
     }
 

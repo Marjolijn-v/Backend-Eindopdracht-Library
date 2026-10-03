@@ -6,6 +6,7 @@ import nl.novi.eindopdrachtbackendlibrary.dtos.loanActivity.LoanActivityResponse
 import nl.novi.eindopdrachtbackendlibrary.entities.BookEntity;
 import nl.novi.eindopdrachtbackendlibrary.entities.LoanActivityEntity;
 import nl.novi.eindopdrachtbackendlibrary.entities.UserEntity;
+import nl.novi.eindopdrachtbackendlibrary.exeptions.BadRequestException;
 import nl.novi.eindopdrachtbackendlibrary.exeptions.RecordNotFoundException;
 import nl.novi.eindopdrachtbackendlibrary.mappers.LoanActivityDtoMapper;
 import nl.novi.eindopdrachtbackendlibrary.repositories.BookRepository;
@@ -70,13 +71,13 @@ public class LoanActivityService {
         UserEntity user = userRepository.findById(loanActivityRequestDto.getUserId()).orElseThrow(() -> new RecordNotFoundException("Gebruiker niet gevonden"));
 
         if (book.getNumberOfCopies() <= 0) {
-            throw new IllegalArgumentException("Geen exemplaren van dit boek beschikbaar");
+            throw new BadRequestException("Geen exemplaren van dit boek beschikbaar");
         }
 
         LoanActivityEntity loanActivity = new LoanActivityEntity();
         loanActivity.setBook(book);
         loanActivity.setUser(user);
-        loanActivity.setLoanDate(LoanActivityRequestDto.getLoanDate() != null ? loanActivityRequestDto.getLoanDate() : LocalDateTime.now());
+        loanActivity.setLoanDate(loanActivityRequestDto.getLoanDate() != null ? loanActivityRequestDto.getLoanDate() : LocalDateTime.now());
         loanActivity.setReturnDate(loanActivityRequestDto.getReturnDate());
 
         book.setNumberOfCopies(book.getNumberOfCopies() -1);
@@ -108,7 +109,7 @@ public class LoanActivityService {
         LoanActivityEntity loanActivity = getLoanActivityEntity(id);
 
         if (loanActivity.getReturnDate() != null) {
-            throw new IllegalArgumentException("Dit boek is al terggebracht");
+            throw new BadRequestException("Dit boek is al teruggebracht");
         }
 
         loanActivity.setReturnDate(LocalDateTime.now());

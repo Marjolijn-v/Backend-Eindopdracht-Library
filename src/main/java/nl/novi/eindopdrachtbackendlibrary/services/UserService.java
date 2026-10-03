@@ -58,7 +58,9 @@ public class UserService {
     }
 
     public void deleteUser(Long id) {
-        userRepository.deleteById(id);
+        UserEntity user = userRepository.findById(id).orElseThrow(() -> new RecordNotFoundException("Gebruiker " + id + " niet gevonden"));
+        userRepository.delete(user);
+
     }
 
 

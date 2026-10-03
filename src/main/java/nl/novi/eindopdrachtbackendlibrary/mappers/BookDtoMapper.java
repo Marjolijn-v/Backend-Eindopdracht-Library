@@ -31,6 +31,11 @@ public class BookDtoMapper implements DtoMapper<BookResponseDto, BookRequestDto,
             result.setAuthors(model.getAuthors().stream().map(this::mapAuthorToSummary).collect(Collectors.toSet()));
         }
 
+        if (model.getBookImages() != null && !model.getBookImages().isEmpty()) {
+            String bookImageUrl = "/books/" + model.getId() + "/images/" + model.getBookImages().get(0).getId();
+            result.setBookImageUrl(bookImageUrl);
+        }
+
         return result;
     }
 

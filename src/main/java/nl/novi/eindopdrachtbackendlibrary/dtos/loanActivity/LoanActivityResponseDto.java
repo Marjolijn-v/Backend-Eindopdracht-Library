@@ -1,6 +1,6 @@
 package nl.novi.eindopdrachtbackendlibrary.dtos.loanActivity;
 
-import nl.novi.eindopdrachtbackendlibrary.dtos.book.BookResponseDto;
+
 import nl.novi.eindopdrachtbackendlibrary.dtos.book.BookSummaryDto;
 import nl.novi.eindopdrachtbackendlibrary.dtos.user.UserResponseDto;
 

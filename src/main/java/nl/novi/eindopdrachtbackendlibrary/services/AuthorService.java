@@ -58,7 +58,8 @@ public class AuthorService {
 
     @Transactional
     public void deleteAuthor(Long id) {
-        authorRepository.deleteById(id);
+        AuthorEntity author = authorRepository.findById(id).orElseThrow(() -> new RecordNotFoundException("Auteur " + id + " niet gevonden"));
+        authorRepository.delete(author);
     }
 
     public List<AuthorResponseDto> getAuthorForBook(Long albumId) {

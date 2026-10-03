@@ -1,8 +1,7 @@
 package nl.novi.eindopdrachtbackendlibrary.dtos.book;
 
-import nl.novi.eindopdrachtbackendlibrary.dtos.author.AuthorResponseDto;
+
 import nl.novi.eindopdrachtbackendlibrary.dtos.author.AuthorSummaryDto;
-import nl.novi.eindopdrachtbackendlibrary.dtos.genre.GenreResponseDto;
 import nl.novi.eindopdrachtbackendlibrary.dtos.genre.GenreSummaryDto;
 
 import java.util.Set;
@@ -15,6 +14,8 @@ public class BookResponseDto {
     private String description;
     private GenreSummaryDto genre;
     private int numberOfCopies;
+    private String bookImageUrl;
+
 
     public Long getId() {
         return id;
@@ -70,5 +71,13 @@ public class BookResponseDto {
 
     public void setNumberOfCopies(int numberOfCopies) {
         this.numberOfCopies = numberOfCopies;
+    }
+
+    public String getBookImageUrl() {
+        return bookImageUrl;
+    }
+
+    public void setBookImageUrl(String bookImageUrl) {
+        this.bookImageUrl = bookImageUrl;
     }
 }

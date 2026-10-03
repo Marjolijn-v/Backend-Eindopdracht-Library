@@ -56,8 +56,8 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.GET, "/genres", "/genres/**").permitAll()
                         .requestMatchers(HttpMethod.GET, "/collections", "/collections?**").permitAll()
 
+                        .requestMatchers(HttpMethod.POST, "/users").permitAll()
                         .requestMatchers(HttpMethod.GET, "/users").hasAnyRole("EMPLOYEE", "ADMIN")
-                        .requestMatchers(HttpMethod.POST, "/users").hasAnyRole("EMPLOYEE", "ADMIN")
                         .requestMatchers(HttpMethod.DELETE, "/users/**").hasRole("ADMIN")
                         .requestMatchers("/users/**").authenticated()
 
@@ -78,6 +78,8 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.PUT, "/books/**").hasAnyRole("EMPLOYEE", "ADMIN")
                         .requestMatchers(HttpMethod.POST, "/books/*/authors/*").hasAnyRole("EMPLOYEE", "ADMIN")
                         .requestMatchers(HttpMethod.DELETE, "/books/*/authors/*").hasAnyRole("EMPLOYEE", "ADMIN")
+                        .requestMatchers(HttpMethod.POST, "/books/*/images").permitAll()
+                        .requestMatchers(HttpMethod.DELETE, "/books/*/images/*").hasAnyRole("EMPLOYEE", "ADMIN")
                         .requestMatchers(HttpMethod.DELETE, "/books/**").hasRole("ADMIN")
 
                         .requestMatchers(HttpMethod.GET, "/loan-activities/user/*").hasAnyRole("MEMBER", "EMPLOYEE", "ADMIN")

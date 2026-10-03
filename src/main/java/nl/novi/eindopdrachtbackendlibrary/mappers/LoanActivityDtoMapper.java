@@ -1,6 +1,6 @@
 package nl.novi.eindopdrachtbackendlibrary.mappers;
 
-import jakarta.persistence.EntityNotFoundException;
+
 import nl.novi.eindopdrachtbackendlibrary.dtos.book.BookSummaryDto;
 import nl.novi.eindopdrachtbackendlibrary.dtos.loanActivity.LoanActivityRequestDto;
 import nl.novi.eindopdrachtbackendlibrary.dtos.loanActivity.LoanActivityResponseDto;
