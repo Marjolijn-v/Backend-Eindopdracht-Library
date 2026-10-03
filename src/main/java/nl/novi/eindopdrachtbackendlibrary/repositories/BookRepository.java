@@ -1,6 +1,6 @@
 package nl.novi.eindopdrachtbackendlibrary.repositories;
 
-import nl.novi.eindopdrachtbackendlibrary.entities.AuthorEntity;
+
 import nl.novi.eindopdrachtbackendlibrary.entities.BookEntity;
 import nl.novi.eindopdrachtbackendlibrary.entities.GenreEntity;
 import org.springframework.data.jpa.repository.JpaRepository;

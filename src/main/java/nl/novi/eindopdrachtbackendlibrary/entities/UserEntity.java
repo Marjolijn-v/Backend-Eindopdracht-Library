@@ -16,10 +16,6 @@ public class UserEntity extends BaseEntity{
     private String phoneNumber;
     private LocalDateTime dob;
 
-    @ManyToOne
-    @JoinColumn(name = "collection_id")
-    private CollectionEntity collection;
-
     public String getName() {
         return name;
     }
@@ -52,11 +48,4 @@ public class UserEntity extends BaseEntity{
         this.dob = dob;
     }
 
-    public CollectionEntity getCollection() {
-        return collection;
-    }
-
-    public void setCollection(CollectionEntity collection) {
-        this.collection = collection;
-    }
 }

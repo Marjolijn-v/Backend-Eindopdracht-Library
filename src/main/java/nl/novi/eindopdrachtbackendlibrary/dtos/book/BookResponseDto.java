@@ -1,8 +1,7 @@
 package nl.novi.eindopdrachtbackendlibrary.dtos.book;
 
-import nl.novi.eindopdrachtbackendlibrary.dtos.author.AuthorResponseDto;
+
 import nl.novi.eindopdrachtbackendlibrary.dtos.author.AuthorSummaryDto;
-import nl.novi.eindopdrachtbackendlibrary.dtos.genre.GenreResponseDto;
 import nl.novi.eindopdrachtbackendlibrary.dtos.genre.GenreSummaryDto;
 
 import java.util.Set;

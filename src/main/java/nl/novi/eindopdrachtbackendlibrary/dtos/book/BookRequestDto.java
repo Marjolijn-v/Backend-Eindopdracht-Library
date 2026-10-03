@@ -8,7 +8,7 @@ import java.util.Set;
 
 public class BookRequestDto {
     @NotBlank(message = "Titel mag niet leeg zijn")
-    @Size(min = 3, max = 200, message = "Titel bevat min 2 en max 3 karakters.")
+    @Size(min = 3, max = 200, message = "Titel bevat min 3 en max 200 karakters.")
     private String title;
 
     private int releaseYear;

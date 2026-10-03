@@ -1,8 +1,6 @@
 package nl.novi.eindopdrachtbackendlibrary.controllers;
 
 import jakarta.validation.Valid;
-import nl.novi.eindopdrachtbackendlibrary.dtos.author.AuthorRequestDto;
-import nl.novi.eindopdrachtbackendlibrary.dtos.author.AuthorResponseDto;
 import nl.novi.eindopdrachtbackendlibrary.dtos.user.UserRequestDto;
 import nl.novi.eindopdrachtbackendlibrary.dtos.user.UserResponseDto;
 import nl.novi.eindopdrachtbackendlibrary.helpers.UrlHelper;
@@ -46,6 +44,7 @@ public class UserController {
     }
 
     @PutMapping("/{id}")
+    @PreAuthorize("@userSecurity.isSelf(#id, authentication)")
     public ResponseEntity<UserResponseDto> updateUser(@PathVariable Long id, @RequestBody @Valid UserRequestDto userRequestDto) {
         UserResponseDto user = userService.updateUser(id, userRequestDto);
         return new ResponseEntity<>(user, HttpStatus.OK);

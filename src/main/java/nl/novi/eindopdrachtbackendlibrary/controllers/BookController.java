@@ -1,5 +1,6 @@
 package nl.novi.eindopdrachtbackendlibrary.controllers;
 
+import jakarta.validation.Valid;
 import nl.novi.eindopdrachtbackendlibrary.dtos.author.AuthorResponseDto;
 import nl.novi.eindopdrachtbackendlibrary.dtos.book.BookRequestDto;
 import nl.novi.eindopdrachtbackendlibrary.dtos.book.BookResponseDto;
@@ -44,13 +45,13 @@ public class BookController {
     }
 
     @PostMapping
-    public ResponseEntity<BookResponseDto> createBook(@RequestBody BookRequestDto bookRequestDto) {
+    public ResponseEntity<BookResponseDto> createBook(@RequestBody @Valid BookRequestDto bookRequestDto) {
         BookResponseDto book = bookService.createBook(bookRequestDto);
         return ResponseEntity.created(urlHelper.getCurrentUrlWithId(book.getId())).body(book);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<BookResponseDto> updateBook(@PathVariable Long id, @RequestBody BookRequestDto bookRequestDto) {
+    public ResponseEntity<BookResponseDto> updateBook(@PathVariable Long id, @RequestBody @Valid BookRequestDto bookRequestDto) {
         BookResponseDto book = bookService.updateBook(id, bookRequestDto);
         return new ResponseEntity<>(book, HttpStatus.OK);
     }

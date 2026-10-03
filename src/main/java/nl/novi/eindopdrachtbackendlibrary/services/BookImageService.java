@@ -63,7 +63,10 @@ public class BookImageService {
 
     @Transactional
     public void deleteImage(Long bookId, Long bookImageId) {
-        BookImageEntity image = getImage(bookId, bookImageId);
+        BookImageEntity image = bookImageRepository.findByIdAndBookId(bookImageId, bookId)
+                .orElseThrow(() -> new RecordNotFoundException(
+                        "Afbeelding " + bookImageId + " niet gevonden voor boek " + bookId));
+
         bookImageRepository.delete(image);
     }
 }

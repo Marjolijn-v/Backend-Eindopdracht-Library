@@ -56,8 +56,8 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.GET, "/genres", "/genres/**").permitAll()
                         .requestMatchers(HttpMethod.GET, "/collections", "/collections?**").permitAll()
 
+                        .requestMatchers(HttpMethod.POST, "/users").permitAll()
                         .requestMatchers(HttpMethod.GET, "/users").hasAnyRole("EMPLOYEE", "ADMIN")
-                        .requestMatchers(HttpMethod.POST, "/users").hasAnyRole("EMPLOYEE", "ADMIN")
                         .requestMatchers(HttpMethod.DELETE, "/users/**").hasRole("ADMIN")
                         .requestMatchers("/users/**").authenticated()
 
