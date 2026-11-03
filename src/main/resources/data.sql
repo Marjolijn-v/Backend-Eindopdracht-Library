@@ -1,8 +1,8 @@
 ALTER SEQUENCE authors_id_seq RESTART WITH 6;
 ALTER SEQUENCE genres_id_seq RESTART WITH 6;
 ALTER SEQUENCE books_id_seq RESTART WITH 6;
-ALTER SEQUENCE collections_id_seq RESTART WITH 6;
-ALTER SEQUENCE users_id_seq RESTART WITH 6;
+ALTER SEQUENCE collections_id_seq RESTART WITH 4;
+ALTER SEQUENCE users_id_seq RESTART WITH 4;
 ALTER SEQUENCE loan_activities_id_seq RESTART WITH 6;
 
 INSERT INTO genres (id, name, description, created_date, edited_date) VALUES
@@ -43,10 +43,10 @@ INSERT INTO book_author (book_id, author_id) VALUES
                                                  (5, 5);  -- Jip en Janneke - Annie M.G. Schmidt
 
 
-INSERT INTO users (id, name, email, phone_number, dob, collection_id, created_date, edited_date) VALUES
-                                                                                                     (1, 'Jan de Vries', 'jan@example.com', '0612345678', '1985-03-15', NULL, NOW(), NOW()),
-                                                                                                     (2, 'Maria Jansen', 'maria@example.com', '0687654321', '1990-07-22', NULL, NOW(), NOW()),
-                                                                                                     (3, 'Peter Smit', 'peter@example.com', '0633445566', '1978-11-08', NULL, NOW(), NOW());
+INSERT INTO users (id, name, email, phone_number, dob, created_date, edited_date) VALUES
+                                                                                                     (1, 'Jan de Vries', 'jan@example.com', '0612345678', '1985-03-15', NOW(), NOW()),
+                                                                                                     (2, 'Maria Jansen', 'maria@example.com', '0687654321', '1990-07-22', NOW(), NOW()),
+                                                                                                     (3, 'Peter Smit', 'peter@example.com', '0633445566', '1978-11-08', NOW(), NOW());
 
 
 INSERT INTO loan_activities (id, book_id, user_id, loan_date, return_date, created_date, edited_date) VALUES
